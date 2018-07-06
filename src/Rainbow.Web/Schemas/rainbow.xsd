@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:rb="http://schemas.inetapi.cn/rainbow/XmlSchema"
+           targetNamespace="http://schemas.inetapi.cn/rainbow/XmlSchema"
+           attributeFormDefault="unqualified"
+           elementFormDefault="qualified">
+
+  <xs:annotation>
+    <xs:documentation>
+      Rainbow 的配置描述信息
+    </xs:documentation>
+  </xs:annotation>
+
+  <xs:element name="Rainbow">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="extensions" type="rb:extensions" minOccurs="0" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>
+              中间件
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="search" type="xs:string" use="optional" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="extensions">
+    <xs:sequence>
+      <xs:element name="extend" type="rb:extend" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="root" type="xs:string" use="optional" />
+  </xs:complexType>
+
+  <xs:complexType name="extend">
+    <xs:sequence />
+    <xs:attribute name="name" use="required" />
+    <xs:attribute name="state" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="enable" />
+          <xs:enumeration value="disable" />
+          <xs:enumeration value="development" />
+          <xs:enumeration value="production" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+</xs:schema>
